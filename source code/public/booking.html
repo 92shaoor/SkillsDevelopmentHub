@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Book Consultation</title>
+</head>
+<body>
+    <header></header> <!-- Placeholder for the header -->
+    
+    <div class="booking-container">
+        <h2>Book a Consultation</h2>
+        <form id="booking-form" action="/book" method="POST" onsubmit="submitBooking(event)">
+            <div class="form-control">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+            </div>
+            <div class="form-control">
+                <label for="email">Your Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-control">
+                <label for="expert">Select Expert</label>
+                <select id="expert" name="expert" required>
+                    <!-- Experts will be dynamically loaded here -->
+                </select>
+            </div>
+            <div class="form-control">
+                <label for="date">Preferred Date</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+            <div class="form-control">
+                <label for="time">Preferred Time</label>
+                <input type="time" id="time" name="time" required>
+            </div>
+            <div class="form-control">
+                <button type="submit">Book Now</button>
+            </div>
+        </form>
+    </div>
+
+    <footer></footer> <!-- Placeholder for the footer -->
+    <script src="/js/loadHeaderFooter.js"></script>
+
+    <script>
+        async function submitBooking(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            const form = document.getElementById('booking-form');
+            const formData = new FormData(form);
+
+            // Convert form data to JSON
+            const bookingData = {};
+            formData.forEach((value, key) => {
+                bookingData[key] = value;
+            });
+
+            try {
+                const response = await fetch('/book', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(bookingData),
+                });
+
+                if (response.ok) {
+                    alert('Booking successfully saved!');
+                    form.reset(); // Reset the form
+                } else {
+                    alert('Failed to save booking. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error submitting booking:', error);
+                alert('An error occurred. Please try again.');
+            }
+        }
+
+        // Fetch experts from the server and populate the dropdown
+        async function fetchExperts() {
+            try {
+                const response = await fetch('/experts'); // Call the /experts endpoint
+                const experts = await response.json(); // Parse the JSON response
+
+                const expertSelect = document.getElementById('expert');
+                expertSelect.innerHTML = ''; // Clear any existing options
+
+                // Add an option for each expert
+                experts.forEach(expert => {
+                    const option = document.createElement('option');
+                    option.value = expert.expertName;
+                    option.textContent = `${expert.expertName} - ${expert.expertField}`;
+                    expertSelect.appendChild(option);
+                });
+            } catch (error) {
+                console.error('Error fetching experts:', error);
+            }
+        }
+
+        // Call the function to fetch and populate experts
+        fetchExperts();
+    </script>
+</body>
+</html>

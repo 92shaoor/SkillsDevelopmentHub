@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <style>
+
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            /* align-items: flex-start; */
+            min-height: 100vh;
+            flex-direction: column;
+        }
+
+        h2 {
+            text-align: center;
+            color: #214acf;
+            margin-top: 20px;
+        }
+
+        section {
+            background-color: #ffffff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 800px;
+        }
+
+        section h3 {
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        table th, table td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #f4f4f9;
+        }
+
+        button {
+            
+            padding: 5px 10px;
+            background-color: #214acf;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #183a8f;
+        }
+        input{
+            border-style:none;
+        } 
+            
+        .desc{
+            input{
+                width:100%;
+            }
+            width: 60%;
+        }
+        .name{
+            input{
+                width:100%;
+            }
+        .courseName{
+            input{
+                width:50%;
+            }
+            
+        }
+            /* max-width: 5%; */
+        }
+        /* .button{
+            max-width: 30%;
+        } */
+        
+    </style>
+</head>
+<body>
+    <header></header>
+
+    <div class="container">
+
+    <h2>Admin Panel</h2>
+
+    <!-- Skills Section -->
+    <section class="section">
+        <h3>Skills</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Skill Name</th>
+                    <th>Skill Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="skills-list">
+                <!-- Skills will be dynamically loaded here -->
+            </tbody>
+        </table>
+        <table>
+            <thead>
+            <tr>
+                <form id="add-skill-form">
+                    <th class="name"><input type="text" id="skillName" placeholder="Skill Name" required></th>
+                    
+                    <th class="desc"><input type="text" id="skillDescription" placeholder="Skill Description" required></th>
+                    
+                    <th class="button"><button type="submit">Add Skill</button></th>
+                    
+                </form>
+            </tr>
+        </thead>
+        </table>
+    </section>
+
+    <!-- Experts Section -->
+    <section class="section">
+        <h3>Experts</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Expert Name</th>
+                    <th>Expert Field</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="experts-list">
+                <!-- Experts will be dynamically loaded here -->
+            </tbody>
+        </table>
+
+        <table>
+            <thead>
+                <tr>
+                    <form id="add-expert-form"></form>
+                    <th>
+                        <input type="text" id="expertName" placeholder="Expert Name" required>
+                    </th>
+                    <th>
+                        <input type="text" id="expertField" placeholder="Expert Field" required>
+                    </th>
+                    <th>
+                        <button type="submit">Add Expert</button>
+                    </th>
+                </form>
+                </tr>
+            </thead>
+        </table>  
+            
+    </section>
+
+    <!-- Users Section -->
+    <section class="section">
+        <h3>Users</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="users-list">
+                <!-- Users will be dynamically loaded here -->
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Bookings Section -->
+    <section class="section">
+        <h3>Bookings</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Expert</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="bookings-list">
+                <!-- Bookings will be dynamically loaded here -->
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Courses Section -->
+    <section class="section">
+        <h3>Courses</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Skill Name</th>
+                    <th>Course Name</th>
+                    <th>Course Description</th>
+                    <th>Course Link</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="courses-list">
+                <!-- Courses will be dynamically loaded here -->
+            </tbody>
+        </table>
+        <form id="add-course-form">
+            <input type="text" id="courseSkillName" placeholder="Skill Name" required>
+            <input type="text" id="courseName" placeholder="Course Name" required>
+            <input type="text" id="courseDescription" placeholder="Course Description" required>
+            <input type="text" id="courseLink" placeholder="Course Link" required>
+            <input type="number" id="coursePrice" placeholder="Course Price" required> <!-- Add price input -->
+            <button type="submit">Add Course</button>
+        </form>
+    </section>
+</div>
+    <footer></footer>
+    <script>
+        // Fetch and display all data
+        async function fetchData(endpoint, containerId) {
+            try {
+                const response = await fetch(endpoint);
+                const data = await response.json();
+
+                const container = document.getElementById(containerId);
+                container.innerHTML = ''; // Clear any existing content
+
+                data.forEach(item => {
+                    const row = document.createElement('tr');
+                    if (endpoint === '/skills') {
+                        row.innerHTML = `
+                            <td>${item.skillName}</td>
+                            <td>${item.skillDescription}</td>
+                            <td>
+                                <button onclick="removeSkill('${item.skillName}')">Remove</button>
+                            </td>
+                        `;
+                    } else if (endpoint === '/experts') {
+                        row.innerHTML = `
+                            <td>${item.expertName}</td>
+                            <td>${item.expertField}</td>
+                            <td>
+                                <button onclick="removeExpert('${item.expertName}')">Remove</button>
+                            </td>
+                        `;
+                    } else if (endpoint === '/users') {
+                        row.innerHTML = `
+                            <td>${item.username}</td>
+                            <td>${item.email}</td>
+                            <td>
+                                <button onclick="removeUser('${item.email}')">Remove</button>
+                            </td>
+                        `;
+                    } else if (endpoint === '/bookings') {
+                        row.innerHTML = `
+                            <td>${item.name}</td>
+                            <td>${item.email}</td>
+                            <td>${item.expert}</td>
+                            <td>${item.date}</td>
+                            <td>${item.time}</td>
+                            <td>
+                                <button onclick="removeBooking('${item._id}')">Remove</button>
+                            </td>
+                        `;
+                    } else if (endpoint === '/courses') {
+                        row.innerHTML = `
+                            <td>${item.skillName}</td>
+                            <td>${item.courseName}</td>
+                            <td>${item.courseDescription}</td>
+                            <td><a href="${item.courseLink}" target="_blank">View Course</a></td>
+                            <td>${item.coursePrice}</td> <!-- Display price -->
+                            <td>
+                                <button onclick="removeCourse('${item._id}')">Remove</button>
+                            </td>
+                        `;
+                    }
+                    container.appendChild(row);
+                });
+            } catch (error) {
+                console.error(`Error fetching data from ${endpoint}:`, error);
+            }
+        }
+
+        // Add Skill
+        document.getElementById('add-skill-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const skillName = document.getElementById('skillName').value;
+            const skillDescription = document.getElementById('skillDescription').value;
+
+            try {
+                const response = await fetch('/admin/add-skill', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ skillName, skillDescription }),
+                });
+
+                if (response.ok) {
+                    alert('Skill added successfully!');
+                    fetchData('/skills', 'skills-list');
+                } else {
+                    alert('Failed to add skill');
+                }
+            } catch (error) {
+                console.error('Error adding skill:', error);
+            }
+        });
+
+        // Remove Skill
+        async function removeSkill(skillName) {
+            try {
+                const response = await fetch('/admin/remove-skill', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ skillName }),
+                });
+
+                if (response.ok) {
+                    alert('Skill removed successfully!');
+                    fetchData('/skills', 'skills-list');
+                } else {
+                    alert('Failed to remove skill');
+                }
+            } catch (error) {
+                console.error('Error removing skill:', error);
+            }
+        }
+
+        // Add Expert
+        document.getElementById('add-expert-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const expertName = document.getElementById('expertName').value;
+            const expertField = document.getElementById('expertField').value;
+
+            try {
+                const response = await fetch('/admin/add-expert', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ expertName, expertField }),
+                });
+
+                if (response.ok) {
+                    alert('Expert added successfully!');
+                    fetchData('/experts', 'experts-list'); // Refresh the experts list
+                } else {
+                    const errorData = await response.json();
+                    alert(`Failed to add expert: ${errorData.message}`);
+                }
+            } catch (error) {
+                console.error('Error adding expert:', error);
+                alert('An error occurred while adding the expert.');
+            }
+        });
+
+        // Remove Expert
+        async function removeExpert(expertName) {
+            try {
+                const response = await fetch('/admin/remove-expert', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ expertName }),
+                });
+
+                if (response.ok) {
+                    alert('Expert removed successfully!');
+                    fetchData('/experts', 'experts-list'); // Refresh the experts list
+                } else {
+                    const errorData = await response.json();
+                    alert(`Failed to remove expert: ${errorData.message}`);
+                }
+            } catch (error) {
+                console.error('Error removing expert:', error);
+                alert('An error occurred while removing the expert.');
+            }
+        }
+
+        // Remove User
+        async function removeUser(email) {
+            try {
+                const response = await fetch('/admin/remove-user', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email }),
+                });
+
+                if (response.ok) {
+                    alert('User removed successfully!');
+                    fetchData('/users', 'users-list'); // Refresh the users list
+                } else {
+                    const errorData = await response.json();
+                    alert(`Failed to remove user: ${errorData.message}`);
+                }
+            } catch (error) {
+                console.error('Error removing user:', error);
+                alert('An error occurred while removing the user.');
+            }
+        }
+
+        // Remove Booking
+        async function removeBooking(bookingId) {
+            try {
+                const response = await fetch('/admin/remove-booking', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ bookingId }),
+                });
+
+                if (response.ok) {
+                    alert('Booking removed successfully!');
+                    fetchData('/bookings', 'bookings-list'); // Refresh the bookings list
+                } else {
+                    const errorData = await response.json();
+                    alert(`Failed to remove booking: ${errorData.message}`);
+                }
+            } catch (error) {
+                console.error('Error removing booking:', error);
+                alert('An error occurred while removing the booking.');
+            }
+        }
+
+        // Add Course
+        document.getElementById('add-course-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const skillName = document.getElementById('courseSkillName').value;
+            const courseName = document.getElementById('courseName').value;
+            const courseDescription = document.getElementById('courseDescription').value;
+            const courseLink = document.getElementById('courseLink').value;
+            const coursePrice = document.getElementById('coursePrice').value; // Get course price
+
+            try {
+                const response = await fetch('/admin/add-course', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ skillName, courseName, courseDescription, courseLink, coursePrice }),
+                });
+
+                if (response.ok) {
+                    alert('Course added successfully!');
+                    fetchData('/courses', 'courses-list'); // Refresh the courses list
+                } else {
+                    const errorData = await response.json();
+                    alert(`Failed to add course: ${errorData.message}`);
+                }
+            } catch (error) {
+                console.error('Error adding course:', error);
+                alert('An error occurred while adding the course.');
+            }
+        });
+
+        // Remove Course
+        async function removeCourse(courseId) {
+            try {
+                const response = await fetch('/admin/remove-course', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ courseId }),
+                });
+
+                if (response.ok) {
+                    alert('Course removed successfully!');
+                    fetchData('/courses', 'courses-list'); // Refresh the courses list
+                } else {
+                    const errorData = await response.json();
+                    alert(`Failed to remove course: ${errorData.message}`);
+                }
+            } catch (error) {
+                console.error('Error removing course:', error);
+                alert('An error occurred while removing the course.');
+            }
+        }
+
+        // Fetch all data on page load
+        fetchData('/skills', 'skills-list');
+        fetchData('/experts', 'experts-list');
+        fetchData('/users', 'users-list');
+        fetchData('/bookings', 'bookings-list');
+        fetchData('/courses', 'courses-list');
+    </script>
+    <script src="/js/loadHeaderFooter.js"></script>
+</body>
+</html>

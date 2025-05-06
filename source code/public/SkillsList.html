@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.2/css/fontawesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+                .cont {
+      display: grid;
+      grid-template-rows: auto auto auto; /* Creates three rows: header, content, footer */
+      min-height: 100vh;
+    }
+
+    .content {
+      grid-row: 2; /* Places the content in the second row */
+    }
+
+    .footer {
+      grid-row: 3; /* Places the footer in the third row */
+    }
+        </style>
+    <title>SkillsList</title>
+</head>
+<body class="cont">
+    <header></header>
+    <div id="header"></div>
+    <h2 class="title" class="content">List of Skills</h2>
+        <div id="courses-container">
+            <!-- Skills will be dynamically loaded here -->
+        </div>
+
+        <footer></footer>
+    <script>
+        // Fetch skills from the server
+        async function fetchSkills() {
+            try {
+                const response = await fetch('/skills'); // Call the /skills endpoint
+                if (!response.ok) {
+                    throw new Error('Failed to fetch skills');
+                }
+
+                const skills = await response.json(); // Parse the JSON response
+                const container = document.getElementById('courses-container');
+                container.innerHTML = ''; // Clear any existing content
+
+                // Loop through the skills and display them
+                skills.forEach(skill => {
+                    const skillDiv = document.createElement('div');
+                    skillDiv.className = 'skill';
+                    skillDiv.innerHTML = `
+                        <img src="images/user-3.png">
+                        <h3>${skill.skillName}</h3>
+                        <p>${skill.skillDescription}</p>
+                        <a href="courses.html?skillName=${encodeURIComponent(skill.skillName)}" class="btn">View Courses &#8594;</a>
+                    `;
+                    container.appendChild(skillDiv);
+                });
+            } catch (error) {
+                console.error('Error fetching skills:', error);
+                const container = document.getElementById('courses-container');
+                container.innerHTML = '<p>Failed to load skills. Please try again later.</p>';
+            }
+        }
+
+        // Call the function to fetch and display skills
+        fetchSkills();
+    </script>
+    <script src="/js/loadHeaderFooter.js"></script>
+</body>
+</html>

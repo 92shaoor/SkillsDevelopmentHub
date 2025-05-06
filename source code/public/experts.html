@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.2/css/fontawesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Our Experts</title>
+</head>
+<body>
+        <header></header>
+        
+        <div id="4" class="tetimonial background">
+        <h2 class="title">Meet Our Expert</h2>
+        <div class="small-container">
+            <div class="row" id="experts-container">
+                <!-- Experts will be dynamically loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <footer></footer>
+
+    <script src="/js/loadHeaderFooter.js"></script>
+
+    <script>
+        // Fetch experts from the server and display them
+        async function fetchExperts() {
+            try {
+                const response = await fetch('/experts'); // Call the /experts endpoint
+                const experts = await response.json(); // Parse the JSON response
+
+                const container = document.getElementById('experts-container');
+                container.innerHTML = ''; // Clear any existing content
+
+                // Loop through the experts and display them
+                experts.forEach(expert => {
+                    const expertDiv = document.createElement('div');
+                    expertDiv.className = 'col-3';
+                    expertDiv.innerHTML = `
+                        <img src="${expert.image || 'images/user-2.png'}" alt="${expert.expertName}">
+                        <h4>${expert.expertName}</h4>
+                        ${expert.expertField}
+                        <a href="/booking.html" class="btn">Book Meeting &#8594;</a>
+                    `;
+                    container.appendChild(expertDiv);
+                });
+            } catch (error) {
+                console.error('Error fetching experts:', error);
+            }
+        }
+
+        // Call the function to fetch and display experts
+        fetchExperts();
+    </script>
+
+    
+</body>
+</html>

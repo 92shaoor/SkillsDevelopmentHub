@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header></header>
+    <div class="container">
+    <h2>Login</h2>
+    
+    <form action="/login" method="POST">
+        <label class="label" for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <label class="label" for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <button type="submit">Login</button>
+    </form>
+    <div class="container">
+    <p>Don't have an account? <a class="loginHere" href="signup.html">Sign up!</a></p>
+
+    <a class="loginHere" href="admin-login.html">Login as admin!</a>
+    </div>
+</div>
+    <footer></footer>
+    <script src="/js/loadHeaderFooter.js"></script>
+</body>
+</html>

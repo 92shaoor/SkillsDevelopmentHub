@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <title>Contact Us</title>
+</head>
+
+<body>
+    <header>
+        <h1>Contact Us</h1>
+    </header>
+    <main>
+        <div class="container">
+            <h2>Contact us!</h2>
+            <form action="#" method="POST" class="contact-form">
+                <div class="form-control">
+                    <label class="label" for="name">Name:</label>
+                    <input type="text" id="name" name="name" required placeholder="Enter your name">
+                </div>
+                <div class="form-control">
+                    <label class="label" for="email">Email:</label>
+                    <input type="email" id="email" name="email" required placeholder="Enter your email">
+                </div>
+                <div class="form-control">
+                    <label class="label" for="phone">Phone no:</label>
+                  <input id="phone" name="phone" type="number" placeholder="Enter your Phone number">
+                </div>
+                <div class="form-control">
+                    <label class="label" for="message">Message:</label>
+                    <textarea id="message"  name="message" required placeholder="Your message here" rows="6" cols="50"></textarea>
+                </div>
+                <div class="form-control">
+                    <button type="submit">Send Message</button>
+                </div>
+            </form>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2023 Contact Us Page. All rights reserved.</p>
+    </footer>
+    <script src="script.js"></script>
+    <script src="js/loadHeaderFooter.js"></script>
+</body>
+
+</html>
