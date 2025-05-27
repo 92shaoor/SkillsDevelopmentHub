@@ -52,12 +52,12 @@ const Booking = mongoose.model('Booking', bookingSchema);
 
 // Skill Schema
 const skillSchema = new mongoose.Schema({
-    skillName: { type: String, required: true },
-    skillDescription: { type: String, required: true },
+    skillName: String,
+    skillDescription: String,
+    imageUrl: String, // Add this field to store the image URL
 });
 
 const Skill = mongoose.model('Skill', skillSchema);
-
 module.exports = Skill;
 
 

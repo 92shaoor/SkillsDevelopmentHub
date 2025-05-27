@@ -34,8 +34,11 @@
         async function fetchExperts() {
             try {
                 const response = await fetch('/experts'); // Call the /experts endpoint
-                const experts = await response.json(); // Parse the JSON response
+                if (!response.ok) {
+                    throw new Error('Failed to fetch experts');
+                }
 
+                const experts = await response.json(); // Parse the JSON response
                 const container = document.getElementById('experts-container');
                 container.innerHTML = ''; // Clear any existing content
 
@@ -44,15 +47,17 @@
                     const expertDiv = document.createElement('div');
                     expertDiv.className = 'col-3';
                     expertDiv.innerHTML = `
-                        <img src="${expert.image || 'images/user-2.png'}" alt="${expert.expertName}">
+                        <img src="${expert.image || 'images/default-expert.png'}" alt="${expert.expertName}">
                         <h4>${expert.expertName}</h4>
-                        ${expert.expertField}
+                        <p>${expert.expertField}</p>
                         <a href="/booking.html" class="btn">Book Meeting &#8594;</a>
                     `;
                     container.appendChild(expertDiv);
                 });
             } catch (error) {
                 console.error('Error fetching experts:', error);
+                const container = document.getElementById('experts-container');
+                container.innerHTML = '<p>Failed to load experts. Please try again later.</p>';
             }
         }
 

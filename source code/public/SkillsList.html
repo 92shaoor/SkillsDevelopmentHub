@@ -38,40 +38,40 @@
 
         <footer></footer>
     <script>
-        // Fetch skills from the server
-        async function fetchSkills() {
-            try {
-                const response = await fetch('/skills'); // Call the /skills endpoint
-                if (!response.ok) {
-                    throw new Error('Failed to fetch skills');
-                }
-
-                const skills = await response.json(); // Parse the JSON response
-                const container = document.getElementById('courses-container');
-                container.innerHTML = ''; // Clear any existing content
-
-                // Loop through the skills and display them
-                skills.forEach(skill => {
-                    const skillDiv = document.createElement('div');
-                    skillDiv.className = 'skill';
-                    skillDiv.innerHTML = `
-                        <img src="images/user-3.png">
-                        <h3>${skill.skillName}</h3>
-                        <p>${skill.skillDescription}</p>
-                        <a href="courses.html?skillName=${encodeURIComponent(skill.skillName)}" class="btn">View Courses &#8594;</a>
-                    `;
-                    container.appendChild(skillDiv);
-                });
-            } catch (error) {
-                console.error('Error fetching skills:', error);
-                const container = document.getElementById('courses-container');
-                container.innerHTML = '<p>Failed to load skills. Please try again later.</p>';
+    // Fetch skills from the server
+    async function fetchSkills() {
+        try {
+            const response = await fetch('/skills'); // Call the /skills endpoint
+            if (!response.ok) {
+                throw new Error('Failed to fetch skills');
             }
-        }
 
-        // Call the function to fetch and display skills
-        fetchSkills();
-    </script>
+            const skills = await response.json(); // Parse the JSON response
+            const container = document.getElementById('courses-container');
+            container.innerHTML = ''; // Clear any existing content
+
+            // Loop through the skills and display them
+            skills.forEach(skill => {
+                const skillDiv = document.createElement('div');
+                skillDiv.className = 'skill';
+                skillDiv.innerHTML = `
+                    <img src="${skill.imageUrl}" alt="${skill.skillName}">
+                    <h3>${skill.skillName}</h3>
+                    <p>${skill.skillDescription}</p>
+                    <a href="courses.html?skillName=${encodeURIComponent(skill.skillName)}" class="btn">View Courses &#8594;</a>
+                `;
+                container.appendChild(skillDiv);
+            });
+        } catch (error) {
+            console.error('Error fetching skills:', error);
+            const container = document.getElementById('courses-container');
+            container.innerHTML = '<p>Failed to load skills. Please try again later.</p>';
+        }
+    }
+
+    // Call the function to fetch and display skills
+    fetchSkills();
+</script>
     <script src="/js/loadHeaderFooter.js"></script>
 </body>
 </html>
